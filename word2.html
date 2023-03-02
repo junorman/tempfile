@@ -1,0 +1,46 @@
+<button onclick="ConvertExDoc('memberAllContentData');">Export as .doc</button>
+<div id="memberAllContentData">
+<h3>
+        <center>Next Export HTML to MS Word Document using JavaScript</center>
+    </h3>
+    <h2>HTML to WORD Converter</h2>
+    <p>Exporting a HTML page as a Microsoft word document can be done in different ways.</p>
+<p>Convert your HTML files to Word online & free. 1. Select your HTML files from device, Google Drive, Dropbox to convert.n this article, I have explained, how you can convert your html document into word. DOC is a word processing file created by Microsoft.
+    </p>
+<div>
+
+    <script>
+function ConvertExDoc(element, filename = ''){
+    var header = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML to Word Document with JavaScript</title></head><body>";
+    var footer = "</body></html>";
+    var html = header+document.getElementById(element).innerHTML+footer;
+    var blob = new Blob(['\ufeff', html], {
+        type: 'application/msword'
+    });
+    
+    // Specify link url
+    var url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html);
+    
+    // Specify file name
+    filename = filename?filename+'.doc':'document.doc';
+    
+    // Make download link element
+    var filefulldlink = document.createElement("a");
+    document.body.appendChild(filefulldlink);
+    
+    if(navigator.msSaveOrOpenBlob ){
+        navigator.msSaveOrOpenBlob(blob, filename);
+    }else{
+        // Make a link to the file
+        filefulldlink.href = url;
+        
+        // Setting the file name
+        filefulldlink.download = filename;
+        
+        //triggering the function
+        filefulldlink.click();
+    }
+    
+    document.body.removeChild(filefulldlink);
+}
+</script>
