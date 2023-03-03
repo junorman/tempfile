@@ -1,0 +1,106 @@
+ <!DOCTYPE html>
+
+<html>
+
+<head>
+
+</head>
+
+<body>
+
+        <h2>Create CSV file having comma in data (Cell value).</h2>
+
+        <button id="createcsv">Download csv</button>
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.min.js" integrity="sha512-JiRzqZPYxjedpFqoYdKBcsKiBUfsmRZTyjuGlumbyJt4WJfWBZNqIizmbNgPN19VFtg3NYywvNk9lkt4KXVhiA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js" integrity="sha512-csNcFYJniKjJxRWRV1R7fvnXrycHP6qDR21mgz1ZP55xY5d+aHLfo9/FcGDQLfn2IfngbAHd8LdfsagcCqgTcQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
+
+
+<script type="text/javascript">
+
+$( document ).ready(function() {
+
+        $(document).on("click","#createcsv", function () {
+
+                var data = [
+
+                                ['name','address', 'test'],
+
+                                ['Ram','#876, sxys, sisj, 89898', 'programme de code syntaxe premier de la liste suivi des calculs de prod'],
+
+                                ['Ajay','#58, abc, xyz, 1234', 'link web for dev in wolrd make better dev for entreprise'],
+
+                                ['Gouri','#254, asikw, sisj, 89898', 'so what is the dev the is the person dev informatique solution in innovation secure']
+
+                           ];
+
+
+
+                createCSV(data,'Subscribe my channel'); 
+
+
+
+        });
+
+});
+
+function createCSV(data,fName) {
+
+var wb = XLSX.utils.book_new();
+
+wb.Props = {
+
+                Title: fName,
+
+                Subject: 'Youtube',
+
+                Author: "Htet exam youtube channel",
+
+                CreatedDate: new Date(2017,12,19)
+
+        };
+
+        wb.SheetNames.push("Test Sheet");
+
+        var ws_data = data;
+
+        var ws = XLSX.utils.aoa_to_sheet(ws_data);
+
+        wb.Sheets["Test Sheet"] = ws;
+
+        var wbout = XLSX.write(wb, {bookType:'csv',  type: 'binary'});
+
+        saveAs(new Blob([s2ab(wbout)],{type:"application/octet-stream"}), fName+'.csv');
+
+}
+
+function s2ab(s) 
+
+{ 
+
+        var buf = new ArrayBuffer(s.length); //convert s to arrayBuffer
+
+        var view = new Uint8Array(buf);  //create uint8array as viewer
+
+        for (var i=0; i<s.length; i++) view[i] = s.charCodeAt(i) & 0xFF; //convert to octet
+
+        return buf;    
+
+}
+
+</script>
+
+</html>
+
