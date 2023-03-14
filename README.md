@@ -1,4 +1,6 @@
 # 
+https://www.section.io/engineering-education/how-to-use-localstorage-with-javascript/
+
 localStorage.removeItem("mytime");
 
 https://www.c-sharpcorner.com/UploadFile/65794e/remove-filtered-sessionstorage-and-localstorage/
