@@ -56,7 +56,7 @@ oiMot de passe : yEGek$35#I8qE
 
 
 
-
+https://stackoverflow.com/questions/29491429/how-to-write-a-join-with-not-equal-in-linq-to-sql
 
 
 <!DOCTYPE html>
