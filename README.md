@@ -1,9 +1,13 @@
 # 
 
-Bonjour Madame, Monsieur,
-Je suis Etudiant inscrit en Alternance niveau Master 1 Architect Informatique à l’école INSTA, actuellement j’occupe le poste de Concepteur Développeur d’applications au sein de l’entreprise Natixis, je viens respectueusement auprès vous solliciter votre aide suite à un souci qui j’ai actuellement qui m’empêche d’exercer certaines activités au sein de mon entreprise, suite à ma demande de renouvèlement de titre de séjour. 
-La Direction des Ressources Humaines au sein de mon entreprise me demande une attestation ou un récépissé prouvant l’action de ma demande de renouvellement de mon titre de séjour auprès de vos instances administratives. Car je les ai présentés le document montrant le dépôt de ma demande faite 31 Mai 2023 mais celle-ci ne leurs convient pas. A cela je tenais à vous demander l’obtention d’un récépissé qui me permettra de reprendre avec mes activités au sein de l’entreprise et elle permettra aussi à la Direction des Ressources Humaines de mettre mes données personnelles à jours
+https://www.youtube.com/watch?v=dDsitOmZq3U
+https://www.youtube.com/watch?v=-iQG94zv6Aw
+https://www.youtube.com/watch?v=GzlQS-0eWEI
+https://www.youtube.com/watch?v=_NDBbiVINlA
 
+https://www.youtube.com/watch?v=dLXSJdTK9QI
+https://www.youtube.com/watch?v=1KZ-tJRLU5I
+https://www.youtube.com/watch?v=3l_CpD-IaJE
 
 https://stackoverflow.com/questions/23191832/how-do-i-update-specific-key-value-of-the-local-storage-array
 
