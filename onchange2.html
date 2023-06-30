@@ -1,0 +1,86 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<div class="form">
+    <input type="text" id="name" name="Name" data-name="bob">
+    <input type="text" id="email" name="Email" data-email="bob@">
+    <input type="text" id="phone" name="Phone" data-phone="1111">
+    <input type="text" id="code" name="Code" data-code="93">
+    <select id="pays" name="Pays" data-pays="USA">
+        <option value="+33" data-pays="33">France</option>
+        <option value="+34" data-pays="34">xpays1</option>
+        <option value="+35" data-pays="35">xpays2</option>
+    </select>
+    <select id="ville" name="Ville" data-ville="Paris">
+        <option value="1" data-ville="451">Lile</option>
+        <option value="2" data-ville="452">Marseille</option>
+        <option value="3" data-ville="453">Anger</option>
+    </select>
+</div>
+
+<hr>
+<button type="button" class="btn-push">get data</button>
+<textarea id="output" rows="10" cols="100" placeholder="output"></textarea>
+
+<script>
+        var nouvelleValeur;
+        var oldValue;
+        var champModifie;
+        var data = [];
+        var localArray = [];
+
+        $(".form input, select").change(function() {
+            //alert($('option:selected', this).attr("id") +" "+ $('option:selected', this).data("ville") +" "+ $(this).children("option:selected").val());
+            data = {
+                oldValue: $(this).data($(this).attr('id')) ? $(this).data($(this).attr('id')) : $('option:selected', this).data($(this).attr('name').toLowerCase()),
+                nouvelleValeur: $(this).val(),
+                champModifie: $(this).attr('name'),
+             
+            }
+            localArray.push(data);
+        });
+
+        $('.btn-push').click(function () {
+            var name = $('#name').val();
+            var email = $('#email').val();
+            var phone = $('#phone').val();
+            var code = $('#code').val();
+            var ville = $('#ville').val();
+            var pays = $('#pays').val();
+
+            console.log(localArray);
+
+            Array.from(localArray).map(el => { 
+                if(el.nouvelleValeur == name){
+                    $('#name').data('name', el.nouvelleValeur);
+                    console.log("New: "+ el.nouvelleValeur);
+                }else if(el.nouvelleValeur == email){
+                    $('#email').data('email', el.nouvelleValeur);
+                    console.log("New: "+ el.nouvelleValeur);
+                }else if(el.nouvelleValeur == phone){
+                    $('#phone').data('phone', el.nouvelleValeur);
+                    console.log("New: "+ el.nouvelleValeur);
+                }else if(el.nouvelleValeur == code){
+                    $('#code').data('code', el.nouvelleValeur);
+                    console.log("New: "+ el.nouvelleValeur);
+                }
+                else if(el.nouvelleValeur == ville){
+                    $('#ville').data('ville', el.nouvelleValeur);
+                    console.log("New: "+ el.nouvelleValeur);
+                }
+                else if(el.nouvelleValeur == pays){
+                    $('#pays').data('pays', el.nouvelleValeur);
+                    console.log("New: "+ el.nouvelleValeur);
+                }          
+            });
+   
+            $('#name').val('');
+            $('#email').val('');
+            $('#phone').val('');
+            $('#code').val('');
+            $('#ville').val('');
+            $('#pays').val('');
+
+            alert($('#name').data('name')+" "+$('#email').data('email')+" "+$('#phone').data('phone')+" "+$('#code').data('code')+" "+$('#ville').data('ville')+" "+$('#pays').data('pays'));
+        });
+     
+</script>
