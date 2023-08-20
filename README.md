@@ -25,6 +25,146 @@ Nom d'utilisateur : Olivier Junior.GUEMBY
 oiMot de passe : yEGek$35#I8qE
 
 
+===================================
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+	<select class="" id="column">
+		<option value="">choisir</option>
+		<option id="1" data-v1="0" value="1">NoLB</option>
+		<option id="2" data-v2="0" value="2">Description</option>
+		<option id="3" data-v3="0" value="3">Libelle</option>
+		<option id="4" data-v4="0" value="4">Fournisseur</option>
+		<option id="5" data-v5="0" value="5">Chain</option>
+		<option id="6" data-v6="0" value="6">Login</option>
+		<option id="7" data-v7="0" value="7">Apllication</option>
+		<option id="8" data-v8="0" value="8">Application Domain</option>
+		<option id="9" data-v9="0" value="9">Application Scope</option>
+		<option id="10" data-v10="0" value="10">Projet</option>
+		<option id="11" data-v11="0" value="11">Budget</option>
+		<option id="12" data-v12="0" value="12">Proforma</option>
+		<option id="13" data-v13="0" value="13">Atterissage</option>
+		<option id="14" data-v14="0" value="14">BR06</option>
+		<option id="15" data-v15="0" value="15">BR09</option>
+	</select>
+
+	<button id="add">dbclick</button>
+
+	<br><br>
+	<table>
+		<tr>
+			<th>NoLB</th>
+			<th>Description</th>
+			<th class="view">Libelle</th>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+	</table>
+<style type="text/css">
+	
+</style>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		var i = 0;
+		
+		//$('#add').dblclick(function(){ alert('');})
+		$('.view').css('visibility', 'hidden');	
+
+		$('#column').change(function (e){
+			var v1 = $("#1").val();
+			var v2 = $("#2").val();
+			var v3 = $("#3").val();
+	        
+	            
+            	if(e.target.value == v1 && $('#1').data('v1') == 0) {
+            		if(i < 2){
+            			$('#1').css('color', 'red');
+		      			$('#1').data('v1', '1');
+		      			i++;
+            		}
+		      	 return false;
+			    }else if(e.target.value == v1 && $('#1').data('v1') == 1) {
+			      $('#1').css('color', 'black');
+			      $('#1').data('v1', '0');
+			      i--;
+			      return false;
+			    }  else if(e.target.value == v2 && $('#2').data('v2') == 0) {
+			    	if(i < 2){
+			    		$('#2').css('color', 'green');
+			      		$('#2').data('v2', '1');
+			      		i++;
+			    	}
+			      return false;
+			    } else if(e.target.value == v2 && $('#2').data('v2') == 1) {
+			      $('#2').css('color', 'black');
+			      $('#2').data('v2', '0');
+			      i--;
+			      return false;
+			    }else if(e.target.value == v3 && $('#3').data('v3') == 0) {
+			    	if(i < 2){
+			    		$('#3').css('color', 'blue');
+					    $('#3').data('v3', '1');
+					    i++;
+			    	}
+			      return false;
+			    }
+			     else if(e.target.value == v3 && $('#3').data('v3') == 1) {
+			      $('#3').css('color', 'black');
+			      $('#3').data('v3', '0');
+			      i--;
+			      return false;
+			    }
+	            
+	            
+		
+	    });
+
+    });
+</script>
+</body>
+</html>
+
+
+<!-- <select onchange="changeColor();" class="color" id="rgb">
+  <option id="red" value="Red">Red</option>
+  <option id="green" value="Green">Green</option>
+  <option id="blue" value="Blue">Blue</option>
+</select>
+
+<script type="text/javascript">
+	function changeColor() {
+    var red = document.getElementById('red');
+    var green = document.getElementById('green');
+    var blue = document.getElementById('blue');
+
+    if(event.target.value == red) {
+      red.style.color = "red";
+    } else if(event.target.value == green) {
+      green.style.color = "green";
+    } else if(event.target.value == blue) {
+      blue.style.color = "blue";
+    } else  {
+      alert("There was an error!");
+      }
+  };
+</script> -->
+
+
+
+
+===================================
+
+
 <?php if ($row['user_etat'] == 0) {?>
             <button <?php echo deactivate_button($DESACTIVER, DESACTIVER) ?> class="btn btn-sm btn-warning btn-modes" 
             id="desactiver<?php echo $row['user_id'] ?>" 
