@@ -165,6 +165,118 @@ oiMot de passe : yEGek$35#I8qE
 ===================================
 
 
+:::::::::::::::::::::::::::::::::::::::::::::::
+$('.btn-follow').click(function(e){
+        e.preventDefault();
+        var id_user_following=$(this).attr('id');
+        var id_following=id_user_following.split("users")[1];
+        var id_user_follower=$(this).data('session_id');
+        var id_follower=id_user_follower.split("session")[1];
+        var action=$(this).data('action');
+        var image=$(this).data('image');
+        var nom=$(this).data('nom');
+        var prenom=$(this).data('prenom');
+        
+            $.ajax({
+                type: "POST",
+                url: "../users_traitements/follow.php",
+                data: {id_follower:id_follower, id_following:id_following, action:action, 
+                    image:image, nom:nom, prenom:prenom},
+                success: function (data) {
+                     
+                     if ( action == 'unfollow') {
+                         $('#users'+id_following).html("<i class='fa fa-check'></i> S'ABONNER").data('action', 'follow'); 
+                          
+                          $('.content').fadeIn().html(
+                            '<div class="alert alert-block alert-default">'
+                              +'<a href="#" class="close_alert" data-dsimmiss="alert" aria-label="close">&times;</a>'
+                              +'<p><strong>Abonnement supprimé</strong></p>  '
+                            +'</div>').css('color', 'blue');
+
+                          setTimeout(function(){
+                         $('.content').fadeOut('slow');
+                       },10000);
+
+                      $('.close_alert').click(function(e){
+                            e.preventDefault();
+                            $('.content').html('');
+                         });
+
+                     }else{
+                         $('#users'+id_following).html("<i class='fa fa-trash'></i> SE DESABONNER").data('action', 'unfollow');
+
+                         $('.content').fadeIn().html(
+                            '<div class="alert alert-block alert-default">'
+                              +'<a href="#" class="close_alert" data-dsimmiss="alert" aria-label="close">&times;</a>'
+                              +"<p><strong>Abonnement ajouté</strong></p>  "
+                              +'<p><< Vous reçevrez desormais les notifications de <strong>'+name_abonnement+'</strong> >> <i class="fa fa-bell"></i></p>  '
+                            +'</div>').css('color', 'blue');
+
+                          setTimeout(function(){
+                         $('.content').fadeOut('slow');
+                       },10000);
+                         
+                         $('.close_alert').click(function(e){
+                            e.preventDefault();
+                            $('.content').html('');
+                         });
+                         
+                         
+                     }
+                  
+                }
+            });
+          
+    });
+:::::::::::::::::::::::::::::::::::::::::::::::
+
+
+
+-----------------------------------------------
+<div class="user-ads-action">
+                                                <?php if (isset($_SESSION['id'])) {
+                                                      
+                                                      if ($_SESSION['id'] == $user['id']) {
+                                                ?>
+                                               <!--  <a class="btn btn-sm  btn-success "><i class=" icon-plus"></i> Follow </a> -->
+                                                <?php    
+                                                  }
+                                                  else{
+                                                  ?>
+                                                  <?php if ($rowcount_follows == 0) {
+                                                    ?>
+                                                       <a class="btn btn-sm  btn-success btn-follow" id="users<?php echo $user['id']; ?>" data-session_id="session<?php echo $_SESSION['id']; ?>" data-action="follow"
+                                                        data-image="<?php echo $_SESSION['image']; ?>" 
+                                                        data-nom="<?php echo $_SESSION['nom']; ?>" 
+                                                        data-prenom="<?php echo $_SESSION['prenom']; ?>">
+                                                    <i class="fa fa-check"></i> S'ABONNER 
+                                                  </a>
+                                                    <?php
+                                                  }else{
+                                                  ?>
+                                                   <a class="btn btn-sm  btn-success btn-follow" id="users<?php echo $user['id']; ?>" data-session_id="session<?php echo $_SESSION['id']; ?>" data-action="unfollow"
+
+                                                    data-image="<?php echo $_SESSION['image']; ?>" 
+                                                        data-nom="<?php echo $_SESSION['nom']; ?>" 
+                                                        data-prenom="<?php echo $_SESSION['prenom']; ?>">
+                                                    <i class="fa fa-trash"></i> SE DESABONNER 
+                                                  </a>
+                                                  <?php
+                                                  } ?>
+                                                 
+                                                <?php
+                                                  }
+                                                }else{
+                                                ?>
+                                                  <a class="btn btn-sm  btn-success " href="login.php">
+                                                    <i class="fa fa-check"></i> S'ABONNER </a>
+                                                  <?php
+                                                } ?>
+                                                
+                                            </div>
+-----------------------------------------------
+
+
 <?php if ($row['user_etat'] == 0) {?>
             <button <?php echo deactivate_button($DESACTIVER, DESACTIVER) ?> class="btn btn-sm btn-warning btn-modes" 
             id="desactiver<?php echo $row['user_id'] ?>" 
