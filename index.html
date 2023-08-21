@@ -1,179 +1,162 @@
-<!doctype html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Convert JSON to XLS and Download</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.min.css" />
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" integrity="sha512-r22gChDnGvBylk90+2e/ycr3RVrDi8DIOkIGNhJlKfuyQM4tIRAI062MaV8sfjQKYVGjOBaZBOA87z+IhZE9DA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    
-    <script src="https://rawgit.com/google/code-prettify/master/loader/run_prettify.js?autoload=true&amp;skin=sunburst&amp;lang=css" defer></script>
-    <style type="text/css">
-    .operative {
-        font-weight: bold;
-        border: 1px solid yellow;
-    }
-
-    #quine {
-        border: 4px solid #88c;
-    }
-
-    .spacer {
-        margin-top: 15px;
-    }
-    </style>
+    <title>Convert HTML To PDF</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
 </head>
-
-<body class="container">
-    <script>
-    $(function() {
-
-
-        var createXLSLFormatObj = [];
-
-        /* XLS Head Columns */
-        var xlsHeader = ["EmployeeID", "Full Name"];
-
-        /* XLS Rows Data */
-        var xlsRows = [{
-                "EmployeeID": "EMP001",
-                "FullName": "Jolly"
-            },
-            {
-                "EmployeeID": "EMP002",
-                "FullName": "Macias"
-            },
-            {
-                "EmployeeID": "EMP003",
-                "FullName": "Lucian"
-            },
-            {
-                "EmployeeID": "EMP004",
-                "FullName": "Blaze"
-            },
-            {
-                "EmployeeID": "EMP005",
-                "FullName": "Blossom"
-            },
-            {
-                "EmployeeID": "EMP006",
-                "FullName": "Kerry"
-            },
-            {
-                "EmployeeID": "EMP007",
-                "FullName": "Adele"
-            },
-            {
-                "EmployeeID": "EMP008",
-                "FullName": "Freaky"
-            },
-            {
-                "EmployeeID": "EMP009",
-                "FullName": "Brooke"
-            },
-            {
-                "EmployeeID": "EMP010",
-                "FullName": "FreakyJolly.Com"
-            }
-        ];
-
-
-        createXLSLFormatObj.push(xlsHeader);
-        $.each(xlsRows, function(index, value) {
-            var innerRowData = [];
-            $("tbody").append('<tr><td>' + value.EmployeeID + '</td><td>' + value.FullName + '</td></tr>');
-            $.each(value, function(ind, val) {
-
-                innerRowData.push(val);
-            });
-            createXLSLFormatObj.push(innerRowData);
-        });
-
-
-        /* File Name */
-        var filename = "FreakyJSON_To_XLS.xlsx";
-
-        /* Sheet Name */
-        var ws_name = "FreakySheet";
-
-        if (typeof console !== 'undefined') console.log(new Date());
-        var wb = XLSX.utils.book_new(),
-            ws = XLSX.utils.aoa_to_sheet(createXLSLFormatObj);
-
-        /* Add worksheet to workbook */
-        XLSX.utils.book_append_sheet(wb, ws, ws_name);
-
-        /* Write workbook and Download */
-        if (typeof console !== 'undefined') console.log(new Date());
-        XLSX.writeFile(wb, filename);
-        if (typeof console !== 'undefined') console.log(new Date());
-
-    });
-    </script>
-    <span class="display-4 spacer">Convert JSON data into XLS EXCEL and Download</span>
-    <h4 class="display-5 spacer">Table Format of DATA to Download</h4>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">EmployeeID</th>
-                <th scope="col">FullName</th>
-            </tr>
-        </thead>
+<body>
+    <input type="button" id="create_pdf" value="Generate PDF">
+   <form class="form" style="max-width: none; width: 1005px;">
+    <h3>DEMO</h3>
+    <p style="font-size: large">
+        Convert HTML TO PDF:
+    </p>
+    <table class="table table-border">
         <tbody>
+        	<tr>
+        		<td>
+        			<img id="SigImage1" src="data:image/gif;base64,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" />
+        		</td>
+        	</tr>
+            <tr>
+                <th>S.N.</th>
+                <th>Employee Name</th>
+                <th>Address</th>
+                <th>Company</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Mike</td>
+                <td>USA</td>
+                <td>Microsoft</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Manoj Ranjit</td>
+                <td>India</td>
+                <td>Tata Motors</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>xìng</td>
+                <td>China</td>
+                <td>Alibaba</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Akari</td>
+                <td>Japan</td>
+                <td>Mitsubishi </td>
+            </tr>
+			<tr>
+                <td>5</td>
+                <td>Binod</td>
+                <td>Nepal</td>
+                <td>CG </td>
+            </tr>
         </tbody>
     </table>
-    <h4 class="display-5 spacer">JSON Format of DATA to Download</h4>
-    <!-- Language hints can be put in XML application directive style comments. -->
-    <?prettify lang=html linenums=true?>
-        <pre class="prettyprint" id="quine">
+</form>
 
-
-[{
-        "EmployeeID": "EMP001",
-        "FullName": "Jolly"
-    },
-    {
-        "EmployeeID": "EMP002",
-        "FullName": "Macias"
-    },
-    {
-        "EmployeeID": "EMP003",
-        "FullName": "Lucian"
-    },
-    {
-        "EmployeeID": "EMP004",
-        "FullName": "Blaze"
-    },
-    {
-        "EmployeeID": "EMP005",
-        "FullName": "Blossom"
-    },
-    {
-        "EmployeeID": "EMP006",
-        "FullName": "Kerry"
-    },
-    {
-        "EmployeeID": "EMP007",
-        "FullName": "Adele"
-    },
-    {
-        "EmployeeID": "EMP008",
-        "FullName": "Freaky"
-    },
-    {
-        "EmployeeID": "EMP009",
-        "FullName": "Brooke"
-    },
-    {
-        "EmployeeID": "EMP010",
-        "FullName": "FreakyJolly.Com"
-    }
-]
-
-</pre>
 </body>
 
 </html>
+<script>
+    (function () {
+        var
+         form = $('.form'),
+         cache_width = form.width(),
+         a4 = [595.28, 841.89]; // for a4 size paper width and height
+
+        $('#create_pdf').on('click', function () {
+            $('body').scrollTop(0);
+            createPDF();
+        });
+        //create pdf
+        function createPDF() {
+            getCanvas().then(function (canvas) {
+                var
+                 img = canvas.toDataURL("image/png"),
+                 doc = new jsPDF({
+                     unit: 'px',
+                     format: 'a4'
+                 });
+                doc.addImage(img, 'JPEG', 20, 20);
+                doc.save('bhavdip-html-to-pdf.pdf');
+                form.width(cache_width);
+            });
+        }
+
+        // create canvas object
+        function getCanvas() {
+            form.width((a4[0] * 1.33333) - 80).css('max-width', 'none');
+            return html2canvas(form, {
+                imageTimeout: 2000,
+                removeContainer: true
+            });
+        }
+
+    }());
+</script>
+<script>
+    (function ($) {
+        $.fn.html2canvas = function (options) {
+            var date = new Date(),
+            $message = null,
+            timeoutTimer = false,
+            timer = date.getTime();
+            html2canvas.logging = options && options.logging;
+            html2canvas.Preload(this[0], $.extend({
+                complete: function (images) {
+                    var queue = html2canvas.Parse(this[0], images, options),
+                    $canvas = $(html2canvas.Renderer(queue, options)),
+                    finishTime = new Date();
+
+                    $canvas.css({ position: 'absolute', left: 0, top: 0 }).appendTo(document.body);
+                    $canvas.siblings().toggle();
+
+                    $(window).click(function () {
+                        if (!$canvas.is(':visible')) {
+                            $canvas.toggle().siblings().toggle();
+                            throwMessage("Canvas Render visible");
+                        } else {
+                            $canvas.siblings().toggle();
+                            $canvas.toggle();
+                            throwMessage("Canvas Render hidden");
+                        }
+                    });
+                    throwMessage('Screenshot created in ' + ((finishTime.getTime() - timer) / 1000) + " seconds<br />", 4000);
+                }
+            }, options));
+
+            function throwMessage(msg, duration) {
+                window.clearTimeout(timeoutTimer);
+                timeoutTimer = window.setTimeout(function () {
+                    $message.fadeOut(function () {
+                        $message.remove();
+                    });
+                }, duration || 2000);
+                if ($message)
+                    $message.remove();
+                $message = $('<div ></div>').html(msg).css({
+                    margin: 0,
+                    padding: 10,
+                    background: "#000",
+                    opacity: 0.7,
+                    position: "fixed",
+                    top: 10,
+                    right: 10,
+                    fontFamily: 'Tahoma',
+                    color: '#fff',
+                    fontSize: 12,
+                    borderRadius: 12,
+                    width: 'auto',
+                    height: 'auto',
+                    textAlign: 'center',
+                    textDecoration: 'none'
+                }).hide().fadeIn().appendTo('body');
+            }
+        };
+    })(jQuery);
+</script>
