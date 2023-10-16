@@ -30,6 +30,8 @@ https://www.youtube.com/watch?v=Ik9jYUVT9do
 https://www.youtube.com/watch?v=V0gMajxp990
 https://www.youtube.com/watch?v=Cq8Hokn2SAQ
 
+SQL
+http://www.salihayacoub.com/420Kba/TransacSql.pdf
 ===================================
 <!DOCTYPE html>
 <html>
