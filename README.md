@@ -33,6 +33,8 @@ https://www.youtube.com/watch?v=Cq8Hokn2SAQ
 SQL
 http://www.salihayacoub.com/420Kba/TransacSql.pdf
 ===================================
+https://www.jqueryscript.net/table/Lightweight-Client-Side-Data-Grid-Plugin-with-jQuery-jsgrid.html
+
 <!DOCTYPE html>
 <html>
 <head>
